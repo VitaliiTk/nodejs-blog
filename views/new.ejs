@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+<body>
+
+    <%- include('partials/header.ejs') %>
+
+    <section class="main">
+        <div class="container">
+            <h2 class="title mt20">ADD NEW POST</h2>
+
+            <ul class="post-list">
+                <li class="post-list__item">
+                    <form action="/new" method="post" class="form">
+                        <div class="form__top">
+                            <div class="form__input-box">
+                                <label for="title">Post Title</label>
+                                <input type="text" name="title" id="title" required>
+                            </div>
+                            <div class="form__input-box">
+                                <label for="author">Author</label>
+                                <input type="text" name="author" id="author" required>
+                            </div>
+                        </div>
+
+                        <label for="textarea">Post Text</label>
+                        <textarea name="textarea" id="textarea" required></textarea>
+                        
+                        <input type="submit" value="submit" class="button">
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </section>
+</body>
+
+</html>

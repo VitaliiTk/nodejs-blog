@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+<body>
+    
+    <%- include('partials/header.ejs') %>
+
+    <section class="main">
+        <div class="container">
+            <ul class="post-list">
+                <% if (locals.post) {%>
+                    <% const {date , author, title, text} = post %>
+                    <li class="post-list__item">
+                        <div class="post-list__header">
+                            <div class="post-list__date"><%= date %></div>
+                            <div class="post-list__author"><%= author %></div>
+                        </div>
+                        <div class="post-list__title">
+                            <%= title %>
+                        </div>
+                        <div class="post-list__text">
+                            <%- text %>
+                        </div>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </section>
+</body>
+
+</html>

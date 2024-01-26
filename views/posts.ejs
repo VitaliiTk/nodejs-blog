@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+<body>
+
+    <%- include('partials/header.ejs') %>
+
+    <section class="main">
+        <div class="container">
+            <h2 class="title mt20">ALL POSTS</h2>
+            <ul class="post-list">
+                <% if(posts.length){%>
+                    <%posts.forEach(({title, date, author, text, id}) => {%>
+                        <li class="post-list__item">
+                            <div class="post-list__title">
+                                <a href="/posts/<%= id %>"><%= title %></a>
+                            </div>
+                            <div class="post-list__text">
+                                <%- text.slice(0, 200) + '...' %>
+                            </div>
+                            <div class="post-list__header">
+                                <div class="post-list__date"><%= date %></div>
+                                <div class="post-list__author"><%= author %></div>
+                            </div>
+                        </li>
+                    <%})%>
+               <% }%>
+            </ul>
+        </div>
+    </section>
+</body>
+
+</html>
