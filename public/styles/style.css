@@ -109,13 +109,17 @@ body {
     text-decoration: none;
 }
 
+.post-list__title a:visited {
+    color: #913ef0;
+}
+
 .post-list__text {
     margin-bottom: 20px;
 }
 
 .post-list__date,
 .post-list__author {
-    color: #DEA309;
+    color: #fff;
 }
 
 /* form */
