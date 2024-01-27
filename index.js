@@ -1,14 +1,31 @@
 import express from "express"
 import uniqid from 'uniqid'
+import mongoose from 'mongoose'
 
 const app = express()
 
-const posts = []
 
-app.use(express.urlencoded({extended: true}))
+// mondoose conect
+mongoose.connect('mongodb+srv://Vitalii:pass123@cluster0.ieuemxw.mongodb.net/node-blog')
 
-app.use(express.static('public'))
+const contactsSchema = new mongoose.Schema({
+    name: String,
+    link: String
+})
 
+// const userModel = mongoose.model('contacts', new mongoose.Schema({name:String, link:String})) // varianr of typing
+const contactsModel = mongoose.model('contacts', contactsSchema) // variant with variable in arguments
+
+
+
+const posts = [] // array for added posts
+
+app.use(express.urlencoded({ extended: true })) // to parse data from inputs on page via req.body
+
+app.use(express.static('public')) // to conect static files like css from public folder
+
+
+// routes
 app.get('/', (req, res) => {
     const title = 'Home'
     res.render('index.ejs', {title})
@@ -33,11 +50,12 @@ app.get('/new', (req, res) => {
 
 app.get('/contacts', (req, res) => {
     const title = 'Contacts'
-    const contacts = [
-        { name: 'YouTube', link: 'https://www.youtube.com/channel/UCwWzx5QwXcSdsG7Fu4sebnQ'},
-        { name: 'FaceBook', link: 'https://www.facebook.com/vitaly.tkachuk.92?locale=ru_RU'}
-    ]
-    res.render('contacts.ejs', { contacts, title })
+
+    // take data from database
+    contactsModel.find().then(data => {
+                                        res.render('contacts.ejs', { title: title, contacts: data })
+                                    }).catch(err => console.log(err))
+    // userModel.find().then(contacts => res.json(contacts)).catch(err => console.log(err))
 })
 
 app.post('/new', (req, res) => {
@@ -50,7 +68,8 @@ app.post('/new', (req, res) => {
         text: textarea
     }
     posts.push(post)
-    res.render('post.ejs', {title, post})
+    // res.render('post.ejs', {title, post})
+    res.redirect('/posts')
 })
 
 app.use((req, res) => {
@@ -60,6 +79,8 @@ app.use((req, res) => {
        .render('error.ejs', { title })
 }) 
 
+
+// create server and listen port
 app.listen(3000, () => {
     console.log('Server running on port 3000');
 })

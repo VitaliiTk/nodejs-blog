@@ -1,9 +1,0 @@
-[
-    {
-        "id": 1,
-        "author": "Vitalii Tkachuk",
-        "title": "Hello all!",
-        "text": "Some text",
-        "date": "new Date()"
-    }
-]

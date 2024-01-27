@@ -190,8 +190,8 @@ body {
 .contacts-list__item {
     text-align: left;
 }
+
 .contacts-list__link {
-    text-decoration: none;
     color: #fff;
 }
 
