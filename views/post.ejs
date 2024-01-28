@@ -11,10 +11,10 @@
         <div class="container">
             <ul class="post-list">
                 <% if (locals.post) {%>
-                    <% const {date , author, title, text} = post %>
+                    <% const {createdAt , author, title, text} = post %>
                     <li class="post-list__item">
                         <div class="post-list__header">
-                            <div class="post-list__date"><%= date %></div>
+                            <div class="post-list__date"><%= createdAt %></div>
                             <div class="post-list__author"><%= author %></div>
                         </div>
                         <div class="post-list__title">

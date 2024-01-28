@@ -12,16 +12,16 @@
             <h2 class="title mt20">ALL POSTS</h2>
             <ul class="post-list">
                 <% if(posts.length){%>
-                    <%posts.forEach(({title, date, author, text, id}) => {%>
+                    <%posts.forEach(({title, createdAt, author, text, id}) => {%>
                         <li class="post-list__item">
                             <div class="post-list__title">
                                 <a href="/posts/<%= id %>"><%= title %></a>
                             </div>
                             <div class="post-list__text">
-                                <%- text.slice(0, 200) + '...' %>
+                                <%- text %>
                             </div>
                             <div class="post-list__header">
-                                <div class="post-list__date"><%= date %></div>
+                                <div class="post-list__date"><%= createdAt %></div>
                                 <div class="post-list__author"><%= author %></div>
                             </div>
                         </li>

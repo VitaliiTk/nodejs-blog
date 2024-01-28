@@ -14,18 +14,16 @@ const contactsSchema = new mongoose.Schema({
 })
 
 // const userModel = mongoose.model('contacts', new mongoose.Schema({name:String, link:String})) // varianr of typing
-const contactsModel = mongoose.model('contacts', contactsSchema) // variant with variable in arguments
+const ContactsModel = mongoose.model('contacts', contactsSchema) // variant with variable in arguments
 
 const postSchema = new mongoose.Schema({
     title: String,
     author: String,
-    text: String
-})
+    text: String,
+}, {timestamps: true})
 
-const postModel = mongoose.model('posts', postSchema)
+const PostModel = mongoose.model('posts', postSchema)
 
-
-const posts = [] // array for added posts
 
 app.use(express.urlencoded({ extended: true })) // to parse data from inputs on page via req.body
 
@@ -39,50 +37,48 @@ app.get('/', (req, res) => {
 })
 
 app.get('/posts/:id', (req, res) => {
-    const post = posts.find( ({id}) => id === req.params['id'] )
-    res.render('post.ejs', { post })
+    PostModel
+        .findById(req.params.id)
+        .then(data => res.render('post.ejs', { post: data, title: data.title }))
+        .catch(error => console.log(error))
 })
 
 app.get('/posts', (req, res) => {
     const title = 'Posts'
-    const reversePosts = [...posts].reverse()
-    res.render('posts.ejs', { title, posts:reversePosts })
+    PostModel
+        .find()
+        .sort({ createdAt: -1 })
+        .then(data => res.render('posts.ejs', { title: title, posts: data }))
+        .catch(error => console.log(error))
 })
 
 app.get('/new', (req, res) => {
     const title = 'New post'
-    res.render('new.ejs', { title })
+    res.render('new.ejs', { title: title })
 })
 
 app.get('/contacts', (req, res) => {
     const title = 'Contacts'
-
-    // take data from database
-    contactsModel
+    ContactsModel
         .find()
-        .then(data => {res.render('contacts.ejs', { title: title, contacts: data })})
+        .then(data => {res.render('contacts.ejs', { title: title, contacts: data } ) })
         .catch(err => console.log(err))
 })
 
 app.post('/new', (req, res) => {
     const {title, author, textarea} = req.body
-    const post = {
-        id: uniqid(),
-        date: new Date(),
-        title,
-        author,
-        text: textarea
-    }
-    posts.push(post)
-    // res.render('post.ejs', {title, post})
-    res.redirect('/posts')
+    const post = new PostModel({ title: title, author: author, text:textarea })
+    post
+        .save()
+        .then(result => res.redirect('/posts'))
+        .catch(error => console.log(error))
 })
 
 app.use((req, res) => {
     const title = 'Error page'
     res
        .status(404)
-       .render('error.ejs', { title })
+       .render('error.ejs', { title: title })
 }) 
 
 
