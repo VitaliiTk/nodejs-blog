@@ -14,7 +14,7 @@
                     <% const {createdAt , author, title, text} = post %>
                     <li class="post-list__item">
                         <div class="post-list__header">
-                            <div class="post-list__date"><%= createdAt %></div>
+                            <div class="post-list__date"><%= createdAt.toLocaleDateString() %></div>
                             <div class="post-list__author"><%= author %></div>
                         </div>
                         <div class="post-list__title">
