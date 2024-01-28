@@ -109,9 +109,9 @@ body {
     text-decoration: none;
 }
 
-.post-list__title a:visited {
+/* .post-list__title a:visited {
     color: #913ef0;
-}
+} */
 
 .post-list__text {
     margin-bottom: 20px;
@@ -185,8 +185,14 @@ body {
 .form .button:hover {
     background-color: #00000080;
 }
+
 .form .button:active {
     background-color: #00000070;
+}
+
+.form input:focus,
+.form textarea:focus {
+    outline: 1px solid #DEA309;
 }
 
 /* contacts */
