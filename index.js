@@ -16,6 +16,13 @@ const contactsSchema = new mongoose.Schema({
 // const userModel = mongoose.model('contacts', new mongoose.Schema({name:String, link:String})) // varianr of typing
 const contactsModel = mongoose.model('contacts', contactsSchema) // variant with variable in arguments
 
+const postSchema = new mongoose.Schema({
+    title: String,
+    author: String,
+    text: String
+})
+
+const postModel = mongoose.model('posts', postSchema)
 
 
 const posts = [] // array for added posts
@@ -32,9 +39,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/posts/:id', (req, res) => {
-    const title = 'Pizda blyad'
     const post = posts.find( ({id}) => id === req.params['id'] )
-    res.render('post.ejs', { title, post })
+    res.render('post.ejs', { post })
 })
 
 app.get('/posts', (req, res) => {
@@ -52,10 +58,10 @@ app.get('/contacts', (req, res) => {
     const title = 'Contacts'
 
     // take data from database
-    contactsModel.find().then(data => {
-                                        res.render('contacts.ejs', { title: title, contacts: data })
-                                    }).catch(err => console.log(err))
-    // userModel.find().then(contacts => res.json(contacts)).catch(err => console.log(err))
+    contactsModel
+        .find()
+        .then(data => {res.render('contacts.ejs', { title: title, contacts: data })})
+        .catch(err => console.log(err))
 })
 
 app.post('/new', (req, res) => {
