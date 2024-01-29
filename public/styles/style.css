@@ -90,6 +90,7 @@ body {
     text-align: left;
     max-width: 1000px;
     margin: 20px auto;
+    position: relative;
 }
 
 .post-list__header {
@@ -209,4 +210,32 @@ body {
 
 .mt20 {
     margin-top: 20px;
+}
+
+.delete-btn,
+.edit-btn {
+    display: inline-block;
+    padding: 5px;
+    background-color: #00000050;
+    text-decoration: none;
+    color: #eb4c4c;
+    font-size: 14px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.new-position {
+    top: auto;
+    bottom: 5px;
+}
+
+.edit-btn {
+    top: auto;
+    bottom: 5px;
+    right: 62px;
+    color: #cecece;
 }

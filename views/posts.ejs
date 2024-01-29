@@ -14,6 +14,7 @@
                 <% if(posts.length){%>
                     <%posts.forEach(({title, createdAt, author, text, id}) => {%>
                         <li class="post-list__item">
+                            <button class="delete-btn" data-id="<%= id %>">Delete</button>
                             <div class="post-list__title">
                                 <a href="/posts/<%= id %>"><%= title %></a>
                             </div>

@@ -11,8 +11,10 @@
         <div class="container">
             <ul class="post-list">
                 <% if (locals.post) {%>
-                    <% const {createdAt , author, title, text} = post %>
+                    <% const {createdAt , author, title, text, id} = post %>
                     <li class="post-list__item">
+                        <button class="delete-btn new-position" data-id="<%= id %>">Delete</button>
+                        <a href="/edit/<%= post.id %>" class="edit-btn" data-id="<%= id %>">Edit</a>
                         <div class="post-list__header">
                             <div class="post-list__date"><%= createdAt.toLocaleDateString() %></div>
                             <div class="post-list__author"><%= author %></div>
